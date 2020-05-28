@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name" translatable="false">Alco Caculator</string>
+    <string name="banner_ad_ma_unit_id" translatable="false">ca-app-pub-2870168293382158/1948773939</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="result">Result</string>
+    <string name="done">Done</string>
+    <string name="It_is_impossible_to_calculate_two_concentrations">It is impossible to calculate two concentrations.</string>
+    <string name="unknown_variables_for_mixing_should_be_2">The number of unknown variables for mixing should be 2. And it is equal</string>
+    <string name="mixer_cannot_calculate">The mixer cannot calculate</string>
+    <string name="sol_name">Name</string>
+    <string name="sol_conc">Concentration</string>
+    <string name="sol_vol">Volume</string>
+</resources>

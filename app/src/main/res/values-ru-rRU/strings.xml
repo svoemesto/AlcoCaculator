@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ingredients">Инредиенты</string>
+    <string name="result">Результат</string>
+    <string name="done">Готово</string>
+    <string name="It_is_impossible_to_calculate_two_concentrations">Невозможно вычислить две концентрации.</string>
+    <string name="unknown_variables_for_mixing_should_be_2">Количество неизвестных переменных для смешивания должно быть 2. А оно равно</string>
+    <string name="mixer_cannot_calculate">Миксер не может произвести вычисления</string>
+    <string name="sol_name">Название</string>
+    <string name="sol_conc">Концентрация</string>
+    <string name="sol_vol">Объем</string>
+</resources>
