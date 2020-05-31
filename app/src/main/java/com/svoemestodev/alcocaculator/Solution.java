@@ -5,18 +5,36 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Solution {
+public class Solution implements Serializable {
 
+    private boolean isCalculatedVol;
+    private boolean isCalculatedConc;
     private String name = null; // название раствора
     private Double vol = null; // объем раствора, л.
     private Double conc = null; // крепость раствора, %
     private Double ac = null; // объем АС, л.
     private Double water = null; // объем воды, л.
 
-    private static final String TAG = "Solution";
+    transient private static final String TAG = "Solution";
+
+    private static int checkResult(Solution result, List<Solution> ingredients) {
+        int res = -3;
+        if (result.ac < 0 || result.conc <0 || result.vol <0 || result.water <0) {
+            res = -2;
+        } else {
+            for (Solution ingredient : ingredients) {
+                if (ingredient.ac < 0 || ingredient.conc <0 || ingredient.vol <0 || ingredient.water <0) {
+                    res = -2;
+                    break;
+                }
+            }
+        }
+        return res;
+    }
 
     public static int Mixer(Solution result, List<Solution> ingredients) {
 
@@ -73,7 +91,7 @@ public class Solution {
                 result.water = sumWater;
                 result.vol = sumAc + sumWater;
                 result.conc = sumAc * 100 / result.vol;
-                return -2;
+                return checkResult(result, ingredients);
             }
 
             // Вариант №2. Неизвестен объем и крепость какого-то одного ингредиента.
@@ -83,7 +101,7 @@ public class Solution {
                     ingredient.water = result.water - sumWater;
                     ingredient.vol = ingredient.ac + ingredient.water;
                     ingredient.conc = ingredient.ac * 100 / ingredient.vol;
-                    return -2;
+                    return checkResult(result, ingredients);
                 }
             }
 
@@ -104,7 +122,7 @@ public class Solution {
                         result.water = sumWater;
                         result.conc = result.ac * 100 / result.vol;
 
-                        return -2;
+                        return checkResult(result, ingredients);
 
                     }
                 }
@@ -123,7 +141,7 @@ public class Solution {
                         ingredient.water = ingredient.vol - ingredient.ac;
                         ingredient.conc = ingredient.ac * 100 / ingredient.vol;
 
-                        return -2;
+                        return checkResult(result, ingredients);
 
                     }
                 }
@@ -142,7 +160,7 @@ public class Solution {
                         ingredient.ac = ingredient.vol * ingredient.conc / 100;
                         ingredient.water = ingredient.vol - ingredient.ac;
 
-                        return -2;
+                        return checkResult(result, ingredients);
 
                     }
                 }
@@ -169,7 +187,7 @@ public class Solution {
                 ings.get(0).ac = ings.get(0).vol * ings.get(0).conc / 100;
                 ings.get(0).water = ings.get(0).vol - ings.get(1).ac;
 
-                return -2;
+                return checkResult(result, ingredients);
 
             }
 
@@ -193,7 +211,7 @@ public class Solution {
                         break;
                     }
                 }
-                return -2;
+                return checkResult(result, ingredients);
             }
 
             // Вариант №8. Неизвестны крепость результата и крепость одного из компонентов
@@ -208,7 +226,6 @@ public class Solution {
 
             // Вариант №9. Неизвестны крепость двух компонентов
             if (countNullConc == 2) {
-                System.out.println("Невозможно вычислить две концентрации.");
                 Log.e(TAG, logMsgPref + "Невозможно вычислить две концентрации.");
                 return -1;
             }
@@ -229,6 +246,14 @@ public class Solution {
         return "Раствор { Объём = " + vol + "л., концентрация = " + conc + "%, (Спирт: " + getAc() + ", Вода: " + getWater() + ") }";
     }
 
+    public Solution(boolean isCalculatedVol, boolean isCalculatedConc, String name, Double vol, Double conc) {
+        this.isCalculatedVol = isCalculatedVol;
+        this.isCalculatedConc = isCalculatedConc;
+        this.name = name;
+        this.vol = vol;
+        this.conc = conc;
+    }
+
     public Solution(Solution... solutions) {
         double tempVol = 0;
         double tempAc = 0;
@@ -240,6 +265,21 @@ public class Solution {
         this.conc = tempAc * 100 / tempVol;
     }
 
+    public boolean isCalculatedVol() {
+        return isCalculatedVol;
+    }
+
+    public void setCalculatedVol(boolean calculatedVol) {
+        isCalculatedVol = calculatedVol;
+    }
+
+    public boolean isCalculatedConc() {
+        return isCalculatedConc;
+    }
+
+    public void setCalculatedConc(boolean calculatedConc) {
+        isCalculatedConc = calculatedConc;
+    }
 
     // получаем объем АС в растворе
     public Double getAc() {

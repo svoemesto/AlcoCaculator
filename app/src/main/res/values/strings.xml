@@ -10,4 +10,24 @@
     <string name="sol_name">Name</string>
     <string name="sol_conc">Concentration</string>
     <string name="sol_vol">Volume</string>
+    <string name="impossible_result">It is not possible to mix with these parameters.</string>
+    <string name="loading">Loading...</string>
+    <string name="version">version</string>
+    <string name="receipt">Recipe</string>
+    <string name="delete_receipt">Delete recipe</string>
+    <string name="confirm_del_receipt">Are you sure you want to delete the recipe \"</string>
+    <string name="error">Error</string>
+    <string name="unable_del_receipt">Unable to delete a single recipe</string>
+    <string name="save_receipt">Saving a recipe</string>
+    <string name="confirm_save_receipt">Are you sure you want to save the changes to the recipe \"</string>
+    <string name="yes_want_save">Yes, I want to save</string>
+    <string name="select_receipt_load">Select a recipe to load</string>
+    <string name="creating_new_receipt">Create a new recipe</string>
+    <string name="want_create_new_receipt">Create a new recipe?</string>
+    <string name="new_receipt">New recipe</string>
+    <string name="enter_receipt_name">Enter a name for the new recipe</string>
+    <string name="receipt_num">Receipt #</string>
+    <string name="enpty_name">Cannot create a recipe with an empty name</string>
+    <string name="receipt_present">A recipe with the same name already exists</string>
+    <string name="yes_want_del">Yes, I want to delete</string>
 </resources>

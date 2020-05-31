@@ -9,4 +9,24 @@
     <string name="sol_name">Название</string>
     <string name="sol_conc">Концентрация</string>
     <string name="sol_vol">Объем</string>
+    <string name="impossible_result">С такими параметрами произвести смещивание невозможно</string>
+    <string name="loading">Загрузка...</string>
+    <string name="version">версия</string>
+    <string name="receipt">Рецепт</string>
+    <string name="delete_receipt">Удаление рецепта</string>
+    <string name="error">Ошибка</string>
+    <string name="unable_del_receipt">Невозможно удалить единственный рецепт</string>
+    <string name="save_receipt">Сохранение рецепта</string>
+    <string name="confirm_save_receipt">Вы действительно хотите сохраниеть изменения в рецепте \"</string>
+    <string name="yes_want_save">Да, хочу сохранить</string>
+    <string name="select_receipt_load">Выберите рецепт для загрузки</string>
+    <string name="creating_new_receipt">Создание нового рецепта</string>
+    <string name="want_create_new_receipt">Создать новый рецепт?</string>
+    <string name="new_receipt">Новый рецепт</string>
+    <string name="enter_receipt_name">Введите название нового рецепта</string>
+    <string name="receipt_num">Рецепт №</string>
+    <string name="enpty_name">Невозможно создание рецепта с пустым названием</string>
+    <string name="receipt_present">Рецепт с таким названием уже существует</string>
+    <string name="yes_want_del">Да, хочу удалить</string>
+    <string name="confirm_del_receipt">Вы действительно хотите удалить рецепт \"</string>
 </resources>
