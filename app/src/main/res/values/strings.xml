@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Alco Caculator</string>
+    <string name="program_folder" translatable="false">ALCOcalc</string>
+    <string name="file_list_receipts" translatable="false">AlcoCalcReceipts</string>
     <string name="banner_ad_ma_unit_id" translatable="false">ca-app-pub-2870168293382158/1948773939</string>
     <string name="ingredients">Ingredients</string>
     <string name="result">Result</string>
@@ -30,4 +32,6 @@
     <string name="enpty_name">Cannot create a recipe with an empty name</string>
     <string name="receipt_present">A recipe with the same name already exists</string>
     <string name="yes_want_del">Yes, I want to delete</string>
+
+
 </resources>

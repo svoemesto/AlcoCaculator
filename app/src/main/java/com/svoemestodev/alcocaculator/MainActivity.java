@@ -126,16 +126,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadListReceipts() {
-        String pathToReceipts = Environment.getExternalStorageDirectory().getPath() + "/ALCOcalc/AlcoCalcReceipts";
-        File alcoCalcReceipts = new File(pathToReceipts);
-        try {
-            FileInputStream fileInputStream = new FileInputStream(alcoCalcReceipts);
-            ObjectInputStream ois = new ObjectInputStream(fileInputStream);
-            listReceipts = (List<Receipt>) ois.readObject();
-            ois.close();
-        } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
-        }
+
+        listReceipts = Receipt.loadList(Environment.getExternalStorageDirectory().getPath() + "/" + getString(R.string.program_folder) + "/" + getString(R.string.file_list_receipts));
 
     }
 
@@ -366,20 +358,10 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
 
-                            String pathToReceipts = Environment.getExternalStorageDirectory().getPath() + "/ALCOcalc/AlcoCalcReceipts";
-                            File alcoCalcReceipts = new File(pathToReceipts);
-
-                            try {
-                                FileOutputStream fileOutputStream = new FileOutputStream(alcoCalcReceipts);
-                                ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
-                                oos.writeObject(newReceiptList);
-                                oos.close();
+                            if (Receipt.saveList(newReceiptList, Environment.getExternalStorageDirectory().getPath() + "/" + getString(R.string.program_folder) + "/" + getString(R.string.file_list_receipts))) {
                                 listReceipts = newReceiptList;
                                 initializeSolutions("");
-                            } catch (IOException e) {
-                                Log.e(TAG, logMsgPref + "Ошибка сериализации в файл " + alcoCalcReceipts.getAbsolutePath());
                             }
-
 
                         }
                     }
@@ -423,18 +405,7 @@ public class MainActivity extends AppCompatActivity {
                                 newListReceipts.add(receipt);
                             }
 
-                            String pathToReceipts = Environment.getExternalStorageDirectory().getPath() + "/ALCOcalc/AlcoCalcReceipts";
-                            File alcoCalcReceipts = new File(pathToReceipts);
-
-                            try {
-                                FileOutputStream fileOutputStream = new FileOutputStream(alcoCalcReceipts);
-                                ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
-                                oos.writeObject(newListReceipts);
-                                oos.close();
-
-                            } catch (IOException e) {
-                                Log.e(TAG, logMsgPref + "Ошибка сериализации в файл " + alcoCalcReceipts.getAbsolutePath());
-                            }
+                            Receipt.saveList(newListReceipts, Environment.getExternalStorageDirectory().getPath() + "/" + getString(R.string.program_folder) + "/" + getString(R.string.file_list_receipts));
 
                         }
 
@@ -493,7 +464,7 @@ public class MainActivity extends AppCompatActivity {
                         builder.setTitle(R.string.new_receipt);
                         builder.setMessage(R.string.enter_receipt_name);
 
-                        String newReceiptName = getString(R.string.receipt_num) + (listReceipts.size()+1);
+                        String newReceiptName = et_ma_result_name.getText().toString();
 
                         final EditText input = new EditText(MainActivity.this);
                         input.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -550,18 +521,8 @@ public class MainActivity extends AppCompatActivity {
                                         Receipt newReceipt = new Receipt(newReceiptName,new Solution(solutionResult.isCalculatedVol(), solutionResult.isCalculatedConc(), solutionResult.getName(),solutionResult.getVol(),solutionResult.getConc()), ingredients);
                                         listReceipts.add(newReceipt);
 
-                                        String pathToReceipts = Environment.getExternalStorageDirectory().getPath() + "/ALCOcalc/AlcoCalcReceipts";
-                                        File alcoCalcReceipts = new File(pathToReceipts);
-
-                                        try {
-                                            FileOutputStream fileOutputStream = new FileOutputStream(alcoCalcReceipts);
-                                            ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
-                                            oos.writeObject(listReceipts);
-                                            oos.close();
+                                        if (Receipt.saveList(listReceipts, Environment.getExternalStorageDirectory().getPath() + "/" + getString(R.string.program_folder) + "/" + getString(R.string.file_list_receipts))) {
                                             initializeSolutions(newReceiptName);
-
-                                        } catch (IOException e) {
-                                            Log.e(TAG, logMsgPref + "Ошибка сериализации в файл " + alcoCalcReceipts.getAbsolutePath());
                                         }
 
                                     }

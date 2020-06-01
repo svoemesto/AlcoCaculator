@@ -43,7 +43,6 @@ public class SplashActivity extends AppCompatActivity {
     final String settingScreenShownPref = "settingScreenShown";
     final String versionCheckedPref = "versionChecked";
 
-
     TextView tv_sp_title;
     ImageView iv_sp_logo;
     TextView tv_sp_version;
@@ -136,7 +135,7 @@ public class SplashActivity extends AppCompatActivity {
         Log.i(TAG, logMsgPref + "start");
 
         // путь к папке программы в корне файловой системы. Если такой папки нет - создаем её
-        String pathToALCOcalcFolder = Environment.getExternalStorageDirectory().getPath() + "/ALCOcalc";
+        String pathToALCOcalcFolder = Environment.getExternalStorageDirectory().getPath() + "/" + getString(R.string.program_folder);
         Log.i(TAG, logMsgPref + "pathToALCOcalcFolder = " + pathToALCOcalcFolder);
 
         File alcoCalcDir = new File(pathToALCOcalcFolder);
@@ -152,29 +151,11 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         if (alcoCalcDir.exists()) {
-            File alcoCalcReceipts = new File(pathToALCOcalcFolder, "AlcoCalcReceipts");
+            File alcoCalcReceipts = new File(pathToALCOcalcFolder, getString(R.string.file_list_receipts));
             if (!alcoCalcReceipts.exists()) {
-                Solution solSpiritus = new Solution(true, true, "C₂H₅OH",2.0,96.4);
-                Solution solWater = new Solution(true, true, "H₂O",3.0,0.0);
-                Solution solVodka = new Solution(false, false, "Vodka",null,null);
 
-                List<Solution> ingredients = new ArrayList<>();
-                ingredients.add(solSpiritus);
-                ingredients.add(solWater);
+                Receipt.saveList(Receipt.getDefaultList(), pathToALCOcalcFolder + "/" + getString(R.string.file_list_receipts));
 
-                Receipt receipt = new Receipt("Vodka", solVodka, ingredients);
-
-                List<Receipt> listReceipts = new ArrayList<>();
-                listReceipts.add(receipt);
-
-                try {
-                    FileOutputStream fileOutputStream = new FileOutputStream(alcoCalcReceipts);
-                    ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
-                    oos.writeObject(listReceipts);
-                    oos.close();
-                } catch (IOException e) {
-                    Log.e(TAG, logMsgPref + "Ошибка сериализации в файл " + alcoCalcReceipts.getAbsolutePath());
-                }
             }
         }
 
