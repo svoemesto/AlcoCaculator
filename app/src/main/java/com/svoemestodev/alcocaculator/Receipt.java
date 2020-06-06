@@ -18,11 +18,14 @@ public class Receipt implements Serializable {
     private Solution result;
     private List<Solution> ingredients;
 
+    public static transient String pathToFile;
+
     public Receipt(String name, Solution result, List<Solution> ingredients) {
         this.name = name;
         this.result = result;
         this.ingredients = ingredients;
     }
+
 
     public Receipt() {
     }
@@ -43,8 +46,8 @@ public class Receipt implements Serializable {
         return list;
     }
 
-    public static List<Receipt> loadList(String pathToFile) {
-        List<Receipt> list = new ArrayList<>();
+    public static List<Receipt> loadList() {
+        List<Receipt> list;
         File file = new File(pathToFile);
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -54,11 +57,12 @@ public class Receipt implements Serializable {
         } catch (ClassNotFoundException | IOException e) {
             Log.e("Receipt", "loadList. Ошибка десериализации. Возвращаем список по-умолчанию.");
             list = getDefaultList();
+            saveList(list);
         }
         return list;
     }
 
-    public static boolean saveList(List<Receipt> list, String pathToFile) {
+    public static boolean saveList(List<Receipt> list) {
         File file = new File(pathToFile);
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);

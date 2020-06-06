@@ -111,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Receipt.pathToFile = getApplicationContext().getFilesDir().getAbsolutePath() + "/" + getString(R.string.file_list_receipts);
+
         initializeViews();
         loadListReceipts();
         initializeSolutions("");
@@ -127,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadListReceipts() {
 
-        listReceipts = Receipt.loadList(Environment.getExternalStorageDirectory().getPath() + "/" + getString(R.string.program_folder) + "/" + getString(R.string.file_list_receipts));
+        listReceipts = Receipt.loadList();
 
     }
 
@@ -358,7 +360,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
 
-                            if (Receipt.saveList(newReceiptList, Environment.getExternalStorageDirectory().getPath() + "/" + getString(R.string.program_folder) + "/" + getString(R.string.file_list_receipts))) {
+                            if (Receipt.saveList(newReceiptList)) {
                                 listReceipts = newReceiptList;
                                 initializeSolutions("");
                             }
@@ -405,7 +407,7 @@ public class MainActivity extends AppCompatActivity {
                                 newListReceipts.add(receipt);
                             }
 
-                            Receipt.saveList(newListReceipts, Environment.getExternalStorageDirectory().getPath() + "/" + getString(R.string.program_folder) + "/" + getString(R.string.file_list_receipts));
+                            Receipt.saveList(newListReceipts);
 
                         }
 
@@ -521,7 +523,7 @@ public class MainActivity extends AppCompatActivity {
                                         Receipt newReceipt = new Receipt(newReceiptName,new Solution(solutionResult.isCalculatedVol(), solutionResult.isCalculatedConc(), solutionResult.getName(),solutionResult.getVol(),solutionResult.getConc()), ingredients);
                                         listReceipts.add(newReceipt);
 
-                                        if (Receipt.saveList(listReceipts, Environment.getExternalStorageDirectory().getPath() + "/" + getString(R.string.program_folder) + "/" + getString(R.string.file_list_receipts))) {
+                                        if (Receipt.saveList(listReceipts)) {
                                             initializeSolutions(newReceiptName);
                                         }
 
