@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="ingredients">Инредиенты</string>
+    <string name="ingredients">Ингредиенты</string>
     <string name="result">Результат</string>
     <string name="done">Готово</string>
     <string name="It_is_impossible_to_calculate_two_concentrations">Невозможно вычислить две концентрации.</string>
